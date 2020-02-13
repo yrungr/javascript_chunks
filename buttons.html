@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<!--
+		<script src="https://d3js.org/d3.v4.js"></script>
+		 -->
+		<style>
+		
+		</style>
+	</head>
+	<body>
+		<div id="main">
+	 	</div>
+		<p id="output">
+		</p>
+		<script>
+
+			buttons();
+
+			function buttons(){
+				var page = document.getElementById("main");
+				var button;
+				var space;
+
+				// alpha button
+				button = document.createElement("BUTTON");
+				button.id = 'alpha';
+				button.type = 'button';
+				button.className = "foo";
+				button.innerHTML = 'alpha';
+				page.appendChild(button);
+
+				// space between buttons
+				space = document.createTextNode("\u00A0");
+				page.appendChild(space);
+
+				// bravo button
+				button = document.createElement("BUTTON");
+				button.id = 'bravo';
+				button.type = 'button';
+				button.className = "foo";
+				button.innerHTML = 'bravo';
+				page.appendChild(button);
+
+				// event listeners
+				document.getElementById("alpha").addEventListener("click", actionalpha, false);
+				document.getElementById("bravo").addEventListener("click", actionbravo, false);
+			}
+
+			function actionalpha(){
+				var paragraph = document.getElementById("output");
+				var text = document.createTextNode("you clicked alpha ");
+				var linebreak = document.createElement("br");
+				paragraph.appendChild(text);
+				paragraph.appendChild(linebreak);
+			}
+			
+			function actionbravo(){
+				var paragraph = document.getElementById("output");
+				var text = document.createTextNode("you clicked bravo ");
+				var linebreak = document.createElement("br");
+				paragraph.appendChild(text);
+				paragraph.appendChild(linebreak);
+			}
+
+
+		</script>
+	</body>
+</html>

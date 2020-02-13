@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<!--
+		<script src="https://d3js.org/d3.v4.js"></script>
+		 -->
+		<style>
+		
+		</style>
+	</head>
+	<body>
+		<div>
+	 	</div>
+		<script>
+
+			var thing = [{'hello':'world'}];
+			var text = JSON.stringify(thing, null, 2);
+			downloader('file.json',text);
+
+			function downloader(filename,input){
+			  data = 'data:text/plain;charset=utf-8,' + encodeURIComponent(input);
+			  var download = document.createElement('a');
+			  download.setAttribute('href', data );
+			  download.setAttribute('download', filename);
+			  document.body.appendChild(download)
+			  download.click()
+			  document.body.removeChild(download)
+			}
+			
+		</script>
+	</body>
+</html>
