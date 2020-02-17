@@ -10,14 +10,16 @@
 		</style>
 	</head>
 	<body>
-		<p id="output"></p>
+		<pre id="output"></pre>
 		<script>
 
-				var paragraph = document.getElementById("output");
-				var text = document.createTextNode("hello, world. ");
+				var data = [{"key":"value"},{"foo":"blah"}];
+				var pretty = JSON.stringify(data, null, 2);
+				var preformatted = document.getElementById("output");
+				var text = document.createTextNode(pretty);
 				var linebreak = document.createElement("br");
-				paragraph.appendChild(text);
-				paragraph.appendChild(linebreak);
+				preformatted.appendChild(text);
+				preformatted.appendChild(linebreak);
 
 		</script>
 	</body>
