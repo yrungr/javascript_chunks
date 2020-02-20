@@ -15,11 +15,16 @@
 
 				var data = [{"key":"value"},{"foo":"blah"}];
 				var pretty = JSON.stringify(data, null, 2);
-				var preformatted = document.getElementById("output");
-				var text = document.createTextNode(pretty);
-				var linebreak = document.createElement("br");
-				preformatted.appendChild(text);
-				preformatted.appendChild(linebreak);
+				addText(pretty);
+
+				function addText(text){
+					var preformatted = document.getElementById("output");
+					var text = document.createTextNode(pretty);
+					var linebreak = document.createElement("br");
+					preformatted.innerHTML = "";
+					preformatted.appendChild(text);
+					preformatted.appendChild(linebreak);
+				}
 
 		</script>
 	</body>
