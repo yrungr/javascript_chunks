@@ -19,10 +19,10 @@
 
 				function addText(text){
 					var preformatted = document.getElementById("output");
-					var text = document.createTextNode(pretty);
+					var textNode = document.createTextNode(pretty);
 					var linebreak = document.createElement("br");
 					preformatted.innerHTML = "";
-					preformatted.appendChild(text);
+					preformatted.appendChild(textNode);
 					preformatted.appendChild(linebreak);
 				}
 
