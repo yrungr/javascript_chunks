@@ -26,9 +26,9 @@
 
 			function rainbow(decimal){
 				var tau = 6.283185;
-				red   = Math.sin(tau * decimal) * 127 + 128;
+				red	 = Math.sin(tau * decimal) * 127 + 128;
 				green = Math.sin((tau * decimal) + (tau / 3)) * 127 + 128;
-				blue  = Math.sin((tau * decimal) + (tau / 3 * 2)) * 127 + 128;
+				blue	= Math.sin((tau * decimal) + (tau / 3 * 2)) * 127 + 128;
 				rgb= "rgb("+red+","+green+","+blue+")"
 				return(rgb);
 			}

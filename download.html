@@ -19,13 +19,13 @@
 			downloader('file.json',text);
 
 			function downloader(filename,input){
-			  data = 'data:text/plain;charset=utf-8,' + encodeURIComponent(input);
-			  var download = document.createElement('a');
-			  download.setAttribute('href', data );
-			  download.setAttribute('download', filename);
-			  document.body.appendChild(download)
-			  download.click()
-			  document.body.removeChild(download)
+				data = 'data:text/plain;charset=utf-8,' + encodeURIComponent(input);
+				var download = document.createElement('a');
+				download.setAttribute('href', data );
+				download.setAttribute('download', filename);
+				document.body.appendChild(download)
+				download.click()
+				document.body.removeChild(download)
 			}
 			
 		</script>

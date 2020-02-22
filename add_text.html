@@ -17,7 +17,7 @@
 				var pretty = JSON.stringify(data, null, 2);
 				addText(pretty);
 
-				function addText(text){
+				function addText(pretty){
 					var preformatted = document.getElementById("output");
 					var textNode = document.createTextNode(pretty);
 					var linebreak = document.createElement("br");
