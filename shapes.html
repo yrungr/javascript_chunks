@@ -9,32 +9,55 @@
 	</head>
 	<body>
 		<div id="stuff">
-			<svg ></svg>
+			<svg  width="1800" height="1000"></svg>
 	 	</div>
 		<script>
 
-	var rect = {};
-	rect.x = 20;
-	rect.y = 20;
-	rect.width = 200;
-	rect.height = 100;
-	rect.fill = "rgb(255,0,0)";
-	drawSvgRectangle(rect);
+	var svgRectangle = {};
+	svgRectangle.x = 20;
+	svgRectangle.y = 20;
+	svgRectangle.width = 200;
+	svgRectangle.height = 100;
+	svgRectangle.fill = "rgb(255,0,0)";
+	drawSvgRectangle(svgRectangle);
 
+	var svgText = {};
+	svgText.x = 300; 
+	svgText.y = 100;
+	svgText.fontSize = 100; 
+	svgText.fontWeight = 300;
+	svgText.textAnchor = "start";
+	svgText.fontFamily = "sans-serif";
+	svgText.fill = "rgb(0,0,255)";
+	svgText.text = "hello world";
+	drawSvgText(svgText);
 
 	/**
 	 * @function drawSvgRectangle
 	 * @description draws an svg rectangle
 	 * @param rect - a dictionary containing the rectangle variables
 	 */
-	function drawSvgRectangle(rect){
+	function drawSvgRectangle(svgRectangle){
 		var svg = d3.select("#stuff").select("svg");
  		svg.append("rect")
-			.attr("x", rect.x)
- 			.attr("y", rect.y)
-			.attr("width", rect.width)
-			.attr("height", rect.height)
-			.attr("fill", rect.fill);
+			.attr("x", svgRectangle.x)
+ 			.attr("y", svgRectangle.y)
+			.attr("width", svgRectangle.width)
+			.attr("height", svgRectangle.height)
+			.attr("fill", svgRectangle.fill);
+	}
+
+	function drawSvgText(svgText){
+		var svg = d3.select("#stuff").select("svg");
+		svg.append("text")
+			.attr("x", svgText.x)
+			.attr("y", svgText.y)
+			.style("font-size", svgText.fontSize+"px")
+			.style("font-weight", svgText.fontWeight)
+			.style("text-anchor", svgText.textAnchor)
+			.attr("font-family", svgText.fontFamily)
+			.attr("fill", svgText.fill)
+			.text(svgText.text);
 	}
 
 		</script>
