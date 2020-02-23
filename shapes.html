@@ -47,6 +47,11 @@
 			.attr("fill", svgRectangle.fill);
 	}
 
+	/**
+	 * @function drawSvgText
+	 * @description draws svg text
+	 * @param rect - a dictionary containing the rectangle variables
+	 */
 	function drawSvgText(svgText){
 		var svg = d3.select("#stuff").select("svg");
 		svg.append("text")
