@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<script src="https://d3js.org/d3.v4.js"></script>
+		<style>
+		
+		</style>
+	</head>
+	<body>
+		<div id="stuff">
+			<svg ></svg>
+	 	</div>
+		<script>
+
+	var rect = {};
+	rect.x = 20;
+	rect.y = 20;
+	rect.width = 200;
+	rect.height = 100;
+	rect.fill = "rgb(255,0,0)";
+	drawSvgRectangle(rect);
+
+
+	/**
+	 * @function drawSvgRectangle
+	 * @description draws an svg rectangle
+	 * @param rect - a dictionary containing the rectangle variables
+	 */
+	function drawSvgRectangle(rect){
+		var svg = d3.select("#stuff").select("svg");
+ 		svg.append("rect")
+			.attr("x", rect.x)
+ 			.attr("y", rect.y)
+			.attr("width", rect.width)
+			.attr("height", rect.height)
+			.attr("fill", rect.fill);
+	}
+
+		</script>
+	</body>
+</html>
