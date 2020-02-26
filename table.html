@@ -23,14 +23,9 @@
 	createTable("target",dataHeader,dataContent);
 
 	function createTable(divName,dataHeader,dataContent){
-		var child;
-		var loop;
-		var titles = [];
-		var content = [];
-		var table, thead, th, row;
-		var text;
-		var cell;
+		var table, thead, row, th, text, cell;
 		var div = document.getElementById(divName);
+		var child;
 		// clear div
 		child = div.lastElementChild;
 		while (child) { 
