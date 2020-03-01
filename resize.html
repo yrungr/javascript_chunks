@@ -1,0 +1,123 @@
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<script src="https://d3js.org/d3.v5.min.js"></script>
+		<style>
+
+			#title {
+				float: top;
+				width: 100%;
+				height: 5vw;
+				background-color: rgb(220,220,255);
+			}
+			#main {
+				float: top;
+				width: 100%;
+				height: 40vw;
+			}
+			#left {
+				float:left;
+				width:50%;
+				height: 100%;
+				background-color:rgb(220,225,220);
+			}
+			#right {
+				float: left;
+				width:50%;
+				height:100%;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="page">
+			<div id = "title"></div>
+			<div id = "main">
+				<div id = "left"></div>
+				<div id = "right">
+					<svg></svg>
+				</div>
+			</div>
+		</div>
+		<script>
+
+			redraw();
+			window.addEventListener("resize", redraw);
+			 
+			function redraw(){
+				// get the current dimensions of the div
+				var divWidth = document.getElementById("right").clientWidth;
+				var divHeight = document.getElementById("right").clientHeight;
+				grid(divWidth,divHeight);
+			}
+			 
+			function grid(divWidth,divHeight){
+				var x1,y1,x2,y2;
+				// select the svg canvas
+				var svg = d3.select("#right").select("svg");
+				// resize to match page
+				svg.attr("width", divWidth).attr("height", divHeight);
+				// delete any previous content
+				svg.selectAll("*").remove();
+				// draw a rectangle inside the div
+				svg.append("rect")
+					.attr('x', 0)
+					.attr('y', 0)
+					.attr('width', divWidth)
+					.attr('height', divHeight)
+					.attr('fill', 'none')
+					.style("stroke","black")
+					.style("stroke-width", divWidth * 0.002 );
+				// vertical lines
+				for ( var xloop=0; xloop<5; xloop++ ){
+					x1 = ( divWidth * 0.02 ) + divWidth * 0.96 / 4 * xloop;
+					y1 = divHeight * 0.02;
+					x2 = x1;
+					y2 = divHeight * 0.98;
+					svg.append("line")
+						.attr("x1", x1)
+						.attr("y1", y1)
+						.attr("x2", x2)
+						.attr("y2", y2)
+						.style("stroke","black")
+						.style("stroke-width", divWidth * 0.003 );
+				}
+				// horizontal lines
+				for ( var yloop=0; yloop<5; yloop++ ){
+					x1 = divWidth * 0.02;
+					y1 = ( divHeight* 0.02 ) + divHeight * 0.96 / 4 * yloop;
+					x2 = divWidth * 0.98;
+					y2 = y1;
+					svg.append("line")
+						.attr("x1", x1)
+						.attr("y1", y1)
+						.attr("x2", x2)
+						.attr("y2", y2)
+						.style("stroke","black")
+						.style("stroke-width", divWidth * 0.003 );
+				}
+				svg.append("circle")
+					.attr("cx", divWidth * 0.38)
+					.attr("cy", divHeight * 0.38)
+					.attr("r", divWidth * 0.05)
+					.attr("fill", "blue");
+				svg.append("text")
+					.attr("x", divWidth * 0.03)
+					.attr("y", divHeight * 0.06)
+					.style("text-anchor", "start")
+					.style("font-size", divWidth * 0.02)
+					.text("divWidth = "+divWidth);
+				svg.append("text")
+					.attr("x", divWidth * 0.03)
+					.attr("y", divHeight * 0.09)
+					.style("text-anchor", "start")
+					.style("font-size", divWidth * 0.02)
+					.text("divHeight = "+divHeight);
+			}
+
+		</script>
+	</body>
+</html>
+
+
