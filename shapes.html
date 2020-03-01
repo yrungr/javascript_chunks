@@ -19,7 +19,20 @@
 	svgRectangle.width = 200;
 	svgRectangle.height = 100;
 	svgRectangle.fill = "rgb(255,0,0)";
+	svgRectangle.strokeWidth = 6;
+	svgRectangle.stroke = "rgb(0,0,0)";
+	svgRectangle.xRadius = 5;
+	svgRectangle.yRadius = 10;
 	drawSvgRectangle(svgRectangle);
+
+	var svgCircle = {};
+	svgCircle.cx = 200;
+	svgCircle.cy = 150;
+	svgCircle.r = 50;
+	svgCircle.fill = "rgb(255,0,0)";
+	svgCircle.strokeWidth = 6;
+	svgCircle.stroke = "rgb(0,0,0)";
+	drawSvgCircle(svgCircle);
 
 	var svgText = {};
 	svgText.x = 300; 
@@ -44,8 +57,28 @@
  			.attr("y", svgRectangle.y)
 			.attr("width", svgRectangle.width)
 			.attr("height", svgRectangle.height)
-			.attr("fill", svgRectangle.fill);
+			.attr("fill", svgRectangle.fill)
+			.attr("stroke", svgRectangle.stroke)
+			.attr("stroke-width", svgRectangle.strokeWidth)
+			.attr("rx", svgRectangle.xRadius)
+			.attr("ry", svgRectangle.yRadius);
 	}
+
+    /**
+     * @function drawSvgCircle
+     * @description draws an svg circle
+     * @param rect - a dictionary containing the circle variables
+     */
+    function drawSvgCircle(svgCircle){
+        var svg = d3.select("#stuff").select("svg");
+        svg.append("circle")
+            .attr("cx", svgCircle.cx)
+            .attr("cy", svgCircle.cy)
+            .attr("r", svgCircle.r)
+            .attr("fill", svgCircle.fill)
+            .attr("stroke", svgCircle.stroke)
+            .attr("stroke-width", svgCircle.strokeWidth);
+    }
 
 	/**
 	 * @function drawSvgText
