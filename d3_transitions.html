@@ -38,25 +38,43 @@
 		svgcanvas
 			.append('rect')
 			.attr('x', 200)
-			.attr('y', 700)
+			.attr('y', 40)
 			.attr('width', 100)
-			.attr('height', 0)
-			.attr('fill', 'white')
+			.attr('height', 800)
+			.attr('fill', redgreen(0.0))
 			.attr('id', 'block');
 
 
 	function changeRectangle(){
-		var height = Math.floor(Math.random() * 600);
-		var red = Math.floor(Math.random() * 255);
-		var green = Math.floor(Math.random() * 255);
-		var blue = Math.floor(Math.random() * 255);
-		var color = "rgb(" + red + "," + green + "," + blue + ")";
+		var height = Math.floor(Math.random() * 800);
+		var color = redgreen((800-height)/800);
 		d3.select("#block")
 			.transition()
 			.duration(1000)
-			.attr("y", 700 - height)
+			.attr("y", 840 - height)
 			.attr("height", height)
 			.attr("fill", color);
+	}
+
+	function redgreen(decimal) {
+		var colorMin = 0;
+		var colorRange = 255 - colorMin;
+		var red,green,blue;
+		var color;
+		// green to yellow
+		if ( decimal < 0.5 ){
+			red = colorMin + Math.round( decimal * 2 * colorRange)
+			green = colorMin + colorRange;
+			blue = colorMin;
+		}
+		// yellow to red
+		if ( decimal >= 0.5 && decimal<=1.0){
+			red = colorMin + colorRange;
+			green = colorMin + Math.round(colorRange-((decimal-0.5)/0.5)*colorRange);
+			blue = colorMin;
+		}
+		color = "rgb(" + red + "," + green + "," + blue + ")";
+		return color;
 	}
 
 
