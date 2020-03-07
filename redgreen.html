@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<script src="https://d3js.org/d3.v4.js"></script>	
+	</head>
+	<body>
+		<div id="canvas">
+			<svg></svg>
+		</div>
+		<script>
+
+	var svg = d3.select("#canvas").select("svg");	
+	svg.attr("width", 1000).attr("height", 1000);
+	var count = 20;
+	var loop;
+	var decimal;
+	for (loop = 0; loop < count; loop++) {
+		decimal = loop / count;
+		svg.append("circle")
+			.attr("cx", 30)
+			.attr("cy", (30 * loop) + 40)
+			.attr("r", 10)
+			.attr("fill", redgreen(decimal));
+	}
+
+	function redgreen(decimal) {
+		var colorMin = 0;
+		var colorRange = 255 - colorMin;
+		var red,green,blue;
+		var color;
+		// green to yellow
+		if ( decimal < 0.5 ){
+			red = colorMin + Math.round( decimal * 2 * colorRange)
+			green = colorMin + colorRange;
+			blue = colorMin;
+		}
+		// yellow to red
+		if ( decimal >= 0.5 && decimal<=1.0){
+			red = colorMin + colorRange;
+			green = colorMin + Math.round(colorRange-((decimal-0.5)/0.5)*colorRange);
+			blue = colorMin;
+		}
+		color = "rgb(" + red + "," + green + "," + blue + ")";
+		return color;
+	}
+
+
+		</script>
+	</body>
+</html>
