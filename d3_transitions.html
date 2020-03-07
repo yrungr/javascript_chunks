@@ -26,9 +26,10 @@
 			.on("click", changeRectangle);
 		svgcanvas.append('text')
 			.attr("x", 100)
-			.attr("y", 107)
+			.attr("y", 108)
 			.style("font-size", "20px")
 			.style("text-anchor", "middle")
+			.style("font-weight", 800)
 			.attr("fill", "white")
 			.text("Click me")
 			.on("click", changeRectangle);
@@ -37,15 +38,15 @@
 		svgcanvas
 			.append('rect')
 			.attr('x', 200)
-			.attr('y', 40)
+			.attr('y', 700)
 			.attr('width', 100)
-			.attr('height', 100)
+			.attr('height', 0)
+			.attr('fill', 'white')
 			.attr('id', 'block');
 
 
 	function changeRectangle(){
-		var width = Math.floor(Math.random() * 1000) + 100;
-		var height = Math.floor(Math.random() * 400) + 100;
+		var height = Math.floor(Math.random() * 600) + 100;
 		var red = Math.floor(Math.random() * 255);
 		var green = Math.floor(Math.random() * 255);
 		var blue = Math.floor(Math.random() * 255);
@@ -53,7 +54,7 @@
 		d3.select("#block")
 			.transition()
 			.duration(1000)
-			.attr("width", width)
+			.attr("y", 700 - height)
 			.attr("height", height)
 			.attr("fill", color);
 	}
