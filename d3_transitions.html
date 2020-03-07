@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<script src="https://d3js.org/d3.v4.js"></script>
+		<style>
+		
+		</style>
+	</head>
+	<body>
+		<div>
+			<svg id="page" 
+	 	</div>
+		<script>
+
+		// svg canvas
+		var svgcanvas = d3.select("#page");
+		svgcanvas.attr("width", 1000).attr("height", 1000);
+
+		// create trigger circle
+		svgcanvas.append('circle')
+            .attr("cx", 50)
+            .attr("cy", 50)
+            .attr("r", 30)
+            .attr("fill", 'rgb(255,0,0)')
+			.on("click", boxes);
+
+		svgcanvas
+			.append('rect')
+			.attr('x', 100)
+			.attr('y', 100)
+			.attr('width', 100)
+			.attr('height', 100)
+			.attr('id', 'block');
+
+
+	function boxes(){
+		var width = Math.floor(Math.random() * 800) + 100;
+		var height = Math.floor(Math.random() * 600) + 100;
+		d3.select("#block")
+			.transition()
+			.duration(2000)
+			.attr("width", width)
+			.attr("height", height);
+	}
+
+
+		</script>
+	</body>
+</html>
