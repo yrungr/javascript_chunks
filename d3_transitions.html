@@ -53,6 +53,7 @@
 			var color = redgreen((800-height)/800);
 			d3.select("#block"+loop)
 				.transition()
+				.delay(loop*20)
 				.duration(1000)
 				.attr("y", 840 - height)
 				.attr("height", height)
