@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+		<style>
+		
+		</style>
+	</head>
+	<body ng-app="">
+		<label>Click me: <input type="checkbox" ng-model="checked" ng-init="checked=true" /></label><br/>
+		Show when checked:
+		<span ng-if="checked" class="animate-if">
+			This is removed when the checkbox is unchecked.
+		</span>
+	</body>
+</html>
+
+
