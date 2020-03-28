@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+		<style>
+		
+		</style>
+	</head>
+	<body ng-app="">
+		<label>Click me: <input type="checkbox" id="visibleCheckbox"/></label><br/>
+		Show when checked:
+		<span ng-if="check" class="animate-if">
+			This is removed when the checkbox is unchecked.
+		</span>
+
+	<script>
+		var check = true;
+		document.getElementById('visibleCheckbox').addEventListener("change",toggleVisibility,false);
+
+		function toggleVisibility(){
+			console.log('check = ' + check);
+			if (check == true){
+				check = false;
+			} else {
+				check = true;
+			}
+		}
+	</script>
+
+
+	</body>
+</html>
+
+
