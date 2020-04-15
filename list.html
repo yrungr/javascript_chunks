@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<style>
+		
+		</style>
+	</head>
+	<body>
+		<div>
+			<select id="products">
+    			<option>Choose a product</option>
+			</select>
+			<pre id="output"></pre>
+	 	</div>
+		<script>
+
+document.getElementById('products').addEventListener('change',blah);
+var select = document.getElementById("products");
+var productList = ["alpha", "bravo", "charlie", "delta", "echo"];
+var productCount;
+var productName;
+var productNumberDict = {};
+var numberProductDict = {};
+var dropdownElement;
+for(var productCount = 0; productCount < productList.length; productCount++) {
+    var productName = productList[productCount];
+    dropdownElement = document.createElement("option");
+    dropdownElement.textContent = productName;
+    dropdownElement.value = productCount;
+    select.appendChild(dropdownElement);
+	// populate dictionaries
+	productNumberDict[productName] = productCount;
+	numberProductDict[productCount] = productName;
+}
+
+function blah(event){
+	var output = document.getElementById('output');
+	output.innerHTML = 'productCount - ' + event.target.value + '<br />';
+	output.innerHTML += 'productName - ' + numberProductDict[event.target.value] + '<br />';
+}
+
+		</script>
+	</body>
+</html>
