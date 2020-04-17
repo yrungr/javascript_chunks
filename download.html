@@ -14,9 +14,9 @@
 	 	</div>
 		<script>
 
-			var thing = [{'hello':'world'}];
-			var text = JSON.stringify(thing, null, 2);
-			downloader('file.json',text);
+			var data = [{'hello':'world'}];
+
+			downloader('file.json',JSON.stringify(data, null, 2));
 
 			function downloader(filename,input){
 				data = 'data:text/plain;charset=utf-8,' + encodeURIComponent(input);
