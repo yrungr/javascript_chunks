@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<script src="https://d3js.org/d3.v4.js"></script>
+		<style>
+		
+		</style>
+	</head>
+	<body>
+		<div>
+			<svg id="svgCanvas" width="1800px" height="800px"></svg>
+	 	</div>
+		<script>
+
+	var x,y,scale;
+	var loop;
+  	var diamond = [
+		{"x":0, "y":59},
+		{"x":78,"y":0},
+		{"x":156,"y":59},
+		{"x":78,"y":118}
+	];
+
+	for (loop =0; loop < 5; loop++){
+		x = 100 + (loop * 200);
+		y = 100 + (loop * 30);
+		scale = 0.4 + (0.2 * loop);
+		createPolygon(diamond,x,y,scale);
+	}
+
+	function createPolygon(polygon,startX,startY,scale){
+		var svgContainer = d3.select("#svgCanvas");
+  		var scaler = d3.scaleLinear().domain([0, 1]).range([0, scale]);
+		svgContainer
+			.data([polygon])
+			.append("polygon")
+			.attr("points",function(d) { 
+				return d.map(function(d) {
+					return [startX + scaler(d.x),startY + scaler(d.y)].join(",");
+				}).join(" ");
+			});
+	}
+
+		</script>
+	</body>
+</html>
