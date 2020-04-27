@@ -14,19 +14,17 @@
 	 	</div>
 		<script>
 
-			var data = [{'hello':'world'}];
-
-			downloader('file.json',JSON.stringify(data, null, 2));
-
-			function downloader(filename,input){
-				data = 'data:text/plain;charset=utf-8,' + encodeURIComponent(input);
+				var data = ['123','456'];
+                                var filename = 'test.json';
+			
+				var jsonData = JSON.stringify(data, null, 2);
+				var encodedData = 'data:text/plain;charset=utf-8,' + encodeURIComponent(jsonData);
 				var download = document.createElement('a');
-				download.setAttribute('href', data );
+				download.setAttribute('href', encodedData );
 				download.setAttribute('download', filename);
 				document.body.appendChild(download)
 				download.click()
 				document.body.removeChild(download)
-			}
 			
 		</script>
 	</body>
