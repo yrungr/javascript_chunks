@@ -15,8 +15,7 @@
 		<script>
 
 				var data = ['123','456'];
-                                var filename = 'test.json';
-			
+				var filename = 'test.json';
 				var jsonData = JSON.stringify(data, null, 2);
 				var encodedData = 'data:text/plain;charset=utf-8,' + encodeURIComponent(jsonData);
 				var download = document.createElement('a');
