@@ -17,10 +17,14 @@
 		var div = document.createElement("div");
 		div.className = ["ttl"];
 		div.id = 'test';
-		document.getElementById("main").appendChild(div);
 		div.style.width = "300px";
 		div.style.height = "300px";
 		div.style.borderStyle = "solid";
+		document.getElementById("main").appendChild(div);
+		var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+		svg.style.width = "300px";
+		svg.style.height = "300px";
+		div.appendChild(svg);
 
 		</script>
 	</body>
