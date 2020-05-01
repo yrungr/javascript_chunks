@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<!--
+		<script src="https://d3js.org/d3.v4.js"></script>
+		 -->
+		<style>
+		
+		</style>
+	</head>
+	<body>
+		<pre id="output"></pre>
+		<script>
+
+var dateList = [];
+var dateObject = {};
+generateDateList(10);
+generateDateObject();
+
+var preformatted = document.getElementById("output");
+preformatted.innerHTML = "";
+preformatted.innerHTML += JSON.stringify(dateList, null, 2);
+preformatted.innerHTML += '<br /><br />';
+preformatted.innerHTML += JSON.stringify(dateObject, null, 2);
+
+function generateDateList(historyCount) {
+    var daysAgoInMilliseconds;
+    var dateObject;
+    var dateLoop;
+    dateList = [];
+    for (dateLoop = 0; dateLoop < historyCount; dateLoop++) {
+        daysAgoInMilliseconds = 86400 * 1000 * dateLoop;
+        dateObject = new Date(Date.now() - daysAgoInMilliseconds);
+        dateList.push(dateObject.toISOString().substring(0, 10));
+    }
+    dateList.sort();
+}
+function generateDateObject() {
+    dateObject = {};
+    dateList.forEach(function (date) {
+        dateObject[date] = date;
+    });
+}
+
+		</script>
+	</body>
+</html>
