@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+	</head>
+	<body>
+        <pre id="output"></pre>
+		<script>
+            var sortedData = {};
+            var serverTypeList = ['FTP', 'HAProxy'];
+            var averagingList = ['one_day', 'thirty_day'];
+            var locationList = ['A2', 'N3'];
+            var dateList = ['2020-05-01', '2020-05-02']
+            var locationObject = {};
+            var averagingObject = {};
+            var historyObject = {};
+            var ttlTemp = {};
+            serverTypeList.forEach(function (servertype) {
+                averagingObject = {};
+                averagingList.forEach(function (averaging) {
+                    locationObject = {};
+                    locationList.forEach(function (location) {
+                        historyObject = {};
+                        dateList.forEach(function (history) {
+                            ttlTemp = {};
+                            ttlTemp['ttl'] = 100;
+                            ttlTemp['warning'] = '';
+                            historyObject[history] = ttlTemp;
+                        });
+                        locationObject[location] = historyObject; 
+                    });
+                    averagingObject[averaging] = locationObject;
+                });
+                sortedData[servertype] = averagingObject;
+            });
+            document.getElementById('output').innerHTML = JSON.stringify(sortedData, null, 2);
+        </script>
+	</body>
+</html>
