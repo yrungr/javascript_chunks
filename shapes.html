@@ -13,13 +13,15 @@
 	 	</div>
 		<script>
 
+	var graphData = [1,2,3,5,7,8,10,4,2,3,1,0,-5,-3,-2,3]
+
 	var svgRectangle = {};
 	svgRectangle.x = 20;
 	svgRectangle.y = 20;
 	svgRectangle.width = 200;
 	svgRectangle.height = 100;
-	svgRectangle.fill = "rgb(255,0,0)";
-	svgRectangle.strokeWidth = 6;
+	svgRectangle.fill = "rgb(100,100,255)";
+	svgRectangle.strokeWidth = 2;
 	svgRectangle.stroke = "rgb(0,0,0)";
 	svgRectangle.xRadius = 5;
 	svgRectangle.yRadius = 10;
@@ -29,8 +31,8 @@
 	svgCircle.cx = 200;
 	svgCircle.cy = 150;
 	svgCircle.r = 50;
-	svgCircle.fill = "rgb(255,0,0)";
-	svgCircle.strokeWidth = 6;
+	svgCircle.fill = "rgb(255,100,100)";
+	svgCircle.strokeWidth = 2;
 	svgCircle.stroke = "rgb(0,0,0)";
 	drawSvgCircle(svgCircle);
 
@@ -41,9 +43,122 @@
 	svgText.fontWeight = 300;
 	svgText.textAnchor = "start";
 	svgText.fontFamily = "sans-serif";
-	svgText.fill = "rgb(0,0,255)";
-	svgText.text = "hello world";
+	svgText.fill = "rgb(0,0,0)";
+	svgText.text = "hello catalin. :)";
 	drawSvgText(svgText);
+
+
+	createGraph();
+
+	function createGraph() {
+		var x,y;
+		var oldx,oldy;
+		var start = true;
+		var datumCount = 0;
+		var graphStartX = 100;
+		var graphSizeX = 600;
+		var graphStartY = 250;
+		var graphSizeY = 400;
+		var graphDays = 100;
+		var lineStrokeWidth = 1;
+		var chartLight = 'rgb(200,200,200)';
+		var chartDark = 'rgb(0,0,0)';
+		var chartLine = 'rgb(200,0,0)';
+		var chartFont = '10px';
+		var graphMax = 16;
+		var xloop,yloop;
+		var u_growth_step;
+		var x;
+		var y;
+		var x1,x2,y1,y2;
+		// prepare the svg canvas
+		var svg = d3.select("#stuff").select("svg");
+		// vertical line
+		x1 = graphStartX;
+		x2 = x1;
+		y1 = graphStartY;
+		y2 = y1 + graphSizeY;
+		svg.append("line")
+			.attr("x1", x1)
+			.attr("y1", y1)
+			.attr("x2", x2)
+			.attr("y2", y2)
+			.attr("stroke-width", lineStrokeWidth)
+			.attr("stroke", chartLight);
+		// horizontal line
+		x1 = graphStartX;
+		x2 = x1 + graphSizeX;
+		y1 = graphStartY + graphSizeY;
+		y2 = y1;
+		svg.append("line")
+			.attr("x1", x1)
+			.attr("y1", y1)
+			.attr("x2", x2)
+			.attr("y2", y2)
+			.attr("stroke-width", lineStrokeWidth)
+			.attr("stroke", chartLight);
+		// dashed zero line
+		x1 = graphStartX;
+		x2 = graphStartX + graphSizeX;
+		y1 = graphStartY + (graphSizeY * 0.5);
+		y2 = y1;
+		svg.append("line")
+			.attr("x1", x1)
+			.attr("y1", y1)
+			.attr("x2", x2)
+			.attr("y2", y2)
+			.attr("stroke-width", lineStrokeWidth)
+			.style("stroke-dasharray", ("4, 8"))
+			.attr("stroke", chartLight);
+		// vertical axis values
+		for ( yloop=0; yloop<11; yloop++){
+			u_growth_step = 5 - yloop;
+			x = graphStartX - 25;
+			y = graphStartY + (graphSizeY / 10 * yloop ) - 5; 
+			svg.append("text")
+				.attr("x", x)
+				.attr("y", y)
+				.style("fill", chartDark)
+				.style("font-size", chartFont)
+				.style("text-anchor", "middle")
+				.text(u_growth_step * graphMax / 5);
+		}
+		// horizontal axis values
+		for ( xloop=0; xloop<21; xloop++){
+			x = graphStartX + graphSizeX - ( graphSizeX / 20 * xloop );
+			y = graphStartY + graphSizeY + 25;
+			svg.append("text")
+				.attr("x", x)
+				.attr("y", y)
+				.style("fill", chartDark)
+				.style("font-size", chartFont)
+				.style("text-anchor", "middle")
+				.text(graphDays / 20 * xloop);
+		}
+		graphData.forEach(function(datum){
+				x = graphStartX + (graphSizeX / graphDays * datumCount);
+				y = graphStartY + (graphSizeY * 0.5) + (datum / graphMax * graphSizeY * -0.5);
+				// line graph code
+				if (start === false) {
+					svg.append("line")
+						.attr("x1", x)
+						.attr("y1", y)
+						.attr("x2", oldx)
+						.attr("y2", oldy)
+						.attr("stroke-width", "2px")
+						.attr("stroke", chartLine);
+				}
+				oldx = x;
+				oldy = y;
+				start = false;
+				datumCount +=1;
+		})
+
+	}
+
+
+
+
 
 	/**
 	 * @function drawSvgRectangle
