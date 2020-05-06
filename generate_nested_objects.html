@@ -7,8 +7,11 @@
         <pre id="output"></pre>
 		<script>
             var sortedData = {};
+            var cloneData = {};
             generateNestedObjects();
+            cloneObject();
             navigateNestedObjects();
+
             function generateNestedObjects(){
                 var serverTypeList = ['FTP', 'HAProxy'];
                 var averagingList = ['one_day', 'thirty_day'];
@@ -39,6 +42,25 @@
                 });
                 document.getElementById('output').innerHTML = JSON.stringify(sortedData, null, 2);
             }
+
+            function cloneObject(){
+                var newAveraging = {};
+                var newLocation = {};
+                Object.keys(sortedData).forEach(function(servertype){
+                    newAveraging = {};
+                    Object.keys(sortedData[servertype]).forEach(function(averaging){
+                        newLocation = {}
+                        Object.keys(sortedData[servertype][averaging]).forEach(function(location){
+                            newLocation[location] = true;
+                        })
+                        newAveraging[averaging] = newLocation;
+                    })
+                    cloneData[servertype] = newAveraging;
+                })
+                document.getElementById('output').innerHTML += '<br /><br />';
+                document.getElementById('output').innerHTML += JSON.stringify(cloneData, null, 2);
+            }
+
             function navigateNestedObjects(){
                 Object.keys(sortedData).sort().forEach(function(servertype){
                     console.log(servertype);
