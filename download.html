@@ -14,12 +14,19 @@
 	 	</div>
 		<script>
 
-				var data = ['123','456'];
 
-				var jsonData = JSON.stringify(data, null, 2);
-				var filename = 'test.json';
-				var encodedData = 'data:text/plain;charset=utf-8,' + encodeURIComponent(jsonData);
-				var download = document.createElement('a');
+				var data = ['123','456'];
+			
+			
+				var jsonData;
+				var filename;
+				var encodedData;
+				var download;
+			
+				jsonData = JSON.stringify(data, null, 2);
+				filename = 'test.json';
+				encodedData = 'data:text/plain;charset=utf-8,' + encodeURIComponent(jsonData);
+				download = document.createElement('a');
 				download.setAttribute('href', encodedData );
 				download.setAttribute('download', filename);
 				document.body.appendChild(download);
