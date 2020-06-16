@@ -71,16 +71,32 @@
   }
 
   function search(networkAdaptorSysid){
+    var results = [];
+    var finalData = [];
     var firstSearch = getConnections(networkAdaptorSysid);
     var preDiv = document.getElementById('results');
     if (firstSearch.length == 0){
       preDiv.innerText = "no connections";
     }
     if (firstSearch.length == 1){
-      plantTrack(networkAdaptorSysid,null);
+      finalData.push(networkAdaptorSysid);
+      results = plantTrack(networkAdaptorSysid,null);
+      results.forEach(function(port){
+        finalData.push(port);
+      })
+      preDiv.innerText = JSON.stringify(finalData,null,2);
     }
     if (firstSearch.length == 2){
-      traceFromMiddle(networkAdaptorSysid);
+      results = plantTrack(networkAdaptorSysid,firstSearch[1]);
+      results.reverse().forEach(function(port){
+        finalData.push(port);
+      })
+      finalData.push(networkAdaptorSysid)
+      results = plantTrack(networkAdaptorSysid,firstSearch[0]);
+      results.forEach(function(port){
+        finalData.push(port);
+      })
+      preDiv.innerText = JSON.stringify(finalData,null,2);
     }
   }
 
@@ -95,6 +111,7 @@ function traceFromMiddle(networkAdaptorSysid){
 }
 
   function plantTrack(networkAdaptorSysid,ignore){
+    var resultData = [];
     var output = document.getElementById('results');
     var connections = [];
     var connectionList = getConnections(networkAdaptorSysid);
@@ -104,9 +121,7 @@ function traceFromMiddle(networkAdaptorSysid){
     var traceComplete = false;
     var startPort = true;
     var safetyCount = 0;
-    console.log("test");
     while (traceComplete == false){
-      console.log("test");
       connections = getConnections(current);
       if (connections.length == 1 && startPort == false){
         traceComplete = true;
@@ -114,7 +129,8 @@ function traceFromMiddle(networkAdaptorSysid){
       matchFound = false;
       connections.forEach(function(connect){
         if (connect != lastConnection && matchFound == false && connect != ignore){
-          output.innerText += connect + '\n';
+          resultData.push(connect);
+          //output.innerText += connect + '\n';
           connectionList.push(connect);
           lastConnection = current;
           matchFound = true;
@@ -128,6 +144,7 @@ function traceFromMiddle(networkAdaptorSysid){
         traceComplete = true;
       }
     }
+    return resultData;
   }
 
     </script>
