@@ -1,0 +1,135 @@
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <!--
+    <script src="https://d3js.org/d3.v4.js"></script>
+     -->
+    <style>
+    
+    </style>
+  </head>
+  <body>
+    <div>
+      <button type="button" id="buttonA">c12321e4dbab47002b56541adc9619d7</button>
+      <br />
+      <button type="button" id="buttonB">dcb66b7b6f4e1680fda99aad5d3ee4dc</button>
+      <br />
+      <button type="button" id="buttonC">2752ca88dba607005d30dd90cf96196d</button>
+      <br />
+      <button type="button" id="buttonD">41bb29ffdb1d130cab79f7d41d96190d</button>
+      <br />
+      <button type="button" id="buttonE">5008f9ccdbe207005d30dd90cf9619c0</button>
+    </div>
+    <pre>
+["c12321e4dbab47002b56541adc9619d7","dcb66b7b6f4e1680fda99aad5d3ee4dc"],
+["dcb66b7b6f4e1680fda99aad5d3ee4dc","2752ca88dba607005d30dd90cf96196d"],
+["41bb29ffdb1d130cab79f7d41d96190d","2752ca88dba607005d30dd90cf96196d"],
+["41bb29ffdb1d130cab79f7d41d96190d","5008f9ccdbe207005d30dd90cf9619c0"]
+    </pre>
+    <pre id="results"></pre>
+    <script>
+  var connections = [
+    ["c12321e4dbab47002b56541adc9619d7","dcb66b7b6f4e1680fda99aad5d3ee4dc"],
+    ["dcb66b7b6f4e1680fda99aad5d3ee4dc","2752ca88dba607005d30dd90cf96196d"],
+    ["41bb29ffdb1d130cab79f7d41d96190d","2752ca88dba607005d30dd90cf96196d"],
+    ["41bb29ffdb1d130cab79f7d41d96190d","5008f9ccdbe207005d30dd90cf9619c0"]
+  ]
+
+  document.getElementById('buttonA').addEventListener("click", function(){
+    document.getElementById('results').innerText = '';
+    search("c12321e4dbab47002b56541adc9619d7");
+  })
+  document.getElementById('buttonB').addEventListener("click", function(){
+    document.getElementById('results').innerText = '';
+    search("dcb66b7b6f4e1680fda99aad5d3ee4dc");
+  })
+  document.getElementById('buttonC').addEventListener("click", function(){
+    document.getElementById('results').innerText = '';
+    search("2752ca88dba607005d30dd90cf96196d");
+  })
+  document.getElementById('buttonD').addEventListener("click", function(){
+    document.getElementById('results').innerText = '';
+    search("41bb29ffdb1d130cab79f7d41d96190d");
+  })
+  document.getElementById('buttonE').addEventListener("click", function(){
+    document.getElementById('results').innerText = '';
+    search("5008f9ccdbe207005d30dd90cf9619c0");
+  })
+
+  function getConnections(networkAdaptorSysid){
+    var output = []
+    connections.forEach(function(cable){
+      if (cable[0] == networkAdaptorSysid){
+        output.push(cable[1]);
+      }
+      if (cable[1] == networkAdaptorSysid){
+        output.push(cable[0]);
+      }
+    })
+    return output;
+  }
+
+  function search(networkAdaptorSysid){
+    var firstSearch = getConnections(networkAdaptorSysid);
+    var preDiv = document.getElementById('results');
+    if (firstSearch.length == 0){
+      preDiv.innerText = "no connections";
+    }
+    if (firstSearch.length == 1){
+      plantTrack(networkAdaptorSysid,null);
+    }
+    if (firstSearch.length == 2){
+      traceFromMiddle(networkAdaptorSysid);
+    }
+  }
+
+function traceFromMiddle(networkAdaptorSysid){
+  var output = document.getElementById('results');
+  var connectionList = getConnections(networkAdaptorSysid);
+  console.clear();
+  console.log(connectionList)
+  plantTrack(networkAdaptorSysid,connectionList[1]);
+  output.innerText += '\n\n';
+  plantTrack(networkAdaptorSysid,connectionList[0]);
+}
+
+  function plantTrack(networkAdaptorSysid,ignore){
+    var output = document.getElementById('results');
+    var connections = [];
+    var connectionList = getConnections(networkAdaptorSysid);
+    var current = networkAdaptorSysid;
+    var lastConnection = networkAdaptorSysid;
+    var matchFound = false;
+    var traceComplete = false;
+    var startPort = true;
+    var safetyCount = 0;
+    console.log("test");
+    while (traceComplete == false){
+      console.log("test");
+      connections = getConnections(current);
+      if (connections.length == 1 && startPort == false){
+        traceComplete = true;
+      }
+      matchFound = false;
+      connections.forEach(function(connect){
+        if (connect != lastConnection && matchFound == false && connect != ignore){
+          output.innerText += connect + '\n';
+          connectionList.push(connect);
+          lastConnection = current;
+          matchFound = true;
+          current = connect;
+        }
+      })
+      startPort = false;
+      safetyCount += 1;
+      console.log(safetyCount);
+      if (safetyCount == 20){
+        traceComplete = true;
+      }
+    }
+  }
+
+    </script>
+  </body>
+</html>
