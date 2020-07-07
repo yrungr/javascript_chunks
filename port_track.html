@@ -2,6 +2,17 @@
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
+		<style>
+      table, td {
+	      border: 1px solid black;
+	      padding: 3px;
+      }
+      th {
+	      border: 1px solid black;
+	      background-color: rgb(153,204,255);
+	      padding: 3px;
+      }
+		</style>
   </head>
   <body>
     <div>
@@ -21,6 +32,8 @@
 ["41bb29ffdb1d130cab79f7d41d96190d","2752ca88dba607005d30dd90cf96196d"],
 ["41bb29ffdb1d130cab79f7d41d96190d","5008f9ccdbe207005d30dd90cf9619c0"]
     </pre>
+    <div id="tables">
+    </div>
     <pre id="results"></pre>
     <script>
   var connections = [
@@ -63,9 +76,9 @@
     var results = [];
     var finalData = [];
     var firstSearch = getConnections(networkAdaptorSysid);
-    var preDiv = document.getElementById('results');
+    //var preDiv = document.getElementById('results');
     if (firstSearch.length == 0){
-      preDiv.innerText = "no connections";
+      //preDiv.innerText = "no connections";
     }
     if (firstSearch.length == 1){
       finalData.push(networkAdaptorSysid);
@@ -73,7 +86,7 @@
       results.forEach(function(port){
         finalData.push(port);
       })
-      preDiv.innerText = JSON.stringify(finalData,null,2);
+      //preDiv.innerText = JSON.stringify(finalData,null,2);
     }
     if (firstSearch.length == 2){
       results = plantTrack(networkAdaptorSysid,firstSearch[1]);
@@ -85,8 +98,61 @@
       results.forEach(function(port){
         finalData.push(port);
       })
-      preDiv.innerText = JSON.stringify(finalData,null,2);
+      //preDiv.innerText = JSON.stringify(finalData,null,2);
     }
+    generateTable(networkAdaptorSysid,finalData);
+  }
+
+  function generateTable(networkAdaptorSysid,finalData){
+    var tableDiv = document.getElementById('tables');
+		var table, thead, row, th, text, cell;
+    var child;
+    var dataHeader = ['Start','Circuit Device A','Circuit Device B'];
+    var dataContent = [['alpha','bravo']];
+    tableDiv.innerHTML = '';
+		// clear div
+		child = tableDiv.lastElementChild;
+		while (child) { 
+			tableDiv.removeChild(child); 
+			child = tableDiv.lastElementChild; 
+    }
+		table = document.createElement('table');
+		thead = table.createTHead();
+    row = thead.insertRow();
+		// headings
+    //start
+		th = document.createElement("th");
+		text = document.createTextNode('start');
+		th.appendChild(text);
+    row.appendChild(th);
+    // circuit device A
+		th = document.createElement("th");
+		text = document.createTextNode('circuit device a');
+		th.appendChild(text);
+    row.appendChild(th);
+    // circuit device b
+		th = document.createElement("th");
+		text = document.createTextNode('circuit device b');
+		th.appendChild(text);
+		row.appendChild(th);
+    // content
+    row = table.insertRow();
+    // start
+		cell = row.insertCell();
+		text = document.createTextNode(networkAdaptorSysid);
+		cell.appendChild(text);
+    row.appendChild(cell);
+    // circuit device A
+		cell = row.insertCell();
+		text = document.createTextNode(finalData[0]);
+		cell.appendChild(text);
+    row.appendChild(cell);
+    // circuit device b
+		cell = row.insertCell();
+		text = document.createTextNode(finalData[finalData.length - 1]);
+		cell.appendChild(text);
+    row.appendChild(cell);
+		tableDiv.appendChild(table);
   }
 
   function plantTrack(networkAdaptorSysid,ignore){
