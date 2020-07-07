@@ -1,0 +1,1 @@
+gs.getProperty("glide.servlet.uri")
