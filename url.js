@@ -23,7 +23,8 @@ document.write(window.location.search);
 document.write(window.location.hash);
 
 
-
+// servicenow client side
+window.open("/nav_to.do?uri=%2Falm_hardware.do%3Fsys_id%3D" + closest.object.alm_hardware_sysid);
 
 // servicenow server side
 gs.getProperty("glide.servlet.uri")
