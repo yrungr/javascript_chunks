@@ -10,14 +10,14 @@
     </style>
   </head>
   <body>
-    <div id="output"></div>
+    <div id="data"></div>
     <script>
 
         var data = [{"key":"value"},{"foo":"blah"}];
         addText(data);
 
         function addText(data){
-          var dataDiv = document.getElementById("output");
+          var dataDiv = document.getElementById("data");
           var preformatted = document.createElement("PRE");
           var linebreak = document.createElement("br");
           var textNode = document.createTextNode(JSON.stringify(data, null, 2));
