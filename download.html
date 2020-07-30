@@ -14,25 +14,25 @@
 	 	</div>
 		<script>
 
+  var data = ['123','456'];
+  downloadThat(data);
+  
+  function downloadThat(data){
+    var jsonData;
+    var filename;
+    var encodedData;
+    var download;
+    jsonData = JSON.stringify(data, null, 2);
+    filename = 'test.json';
+    encodedData = 'data:text/plain;charset=utf-8,' + encodeURIComponent(jsonData);
+    download = document.createElement('a');
+    download.setAttribute('href', encodedData );
+    download.setAttribute('download', filename);
+    document.body.appendChild(download);
+    download.click();
+    document.body.removeChild(download);
+  }
 
-				var data = ['123','456'];
-			
-			
-				var jsonData;
-				var filename;
-				var encodedData;
-				var download;
-			
-				jsonData = JSON.stringify(data, null, 2);
-				filename = 'test.json';
-				encodedData = 'data:text/plain;charset=utf-8,' + encodeURIComponent(jsonData);
-				download = document.createElement('a');
-				download.setAttribute('href', encodedData );
-				download.setAttribute('download', filename);
-				document.body.appendChild(download);
-				download.click();
-				document.body.removeChild(download);
-			
 		</script>
 	</body>
 </html>
